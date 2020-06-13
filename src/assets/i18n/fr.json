@@ -1,0 +1,21 @@
+{
+  "SelectLang": "Choisir La Langue",
+  "Address": "Adresse",
+  "Title": "Envoie-nous un message",
+  "Talk": "Parlons",
+  "Support": "Support Général",
+  "Name": "Dites-Nous Votre Nom",
+  "Email": "ENTRER VOTRE EMAIL",
+  "Fname": "Prénom",
+  "Lname": "Nom de famille",
+  "Phone": "ENTREZ LE NUMÉRO DE TÉLÉPHONE",
+  "EmailEg": "Par exemple. example@email.com",
+  "PhoneEg": "Par exemple. +1 800 000000",
+  "Message": "Message",
+  "SendMessage": "ENVOYER LE MESSAGE",
+  "WriteMessage": "Écrivez-nous un message",
+  "FnameError": "Tapez le prénom",
+  "LnameError": "Saisissez le nom de famille",
+  "EmailError": "Un email valide est requis: ex@abc.xyz",
+  "MessageError": "Un message est requis"
+}

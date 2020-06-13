@@ -1,0 +1,21 @@
+{
+  "SelectLang": "Select Language",
+  "Address": "Address",
+  "Title": "Send Us A Message",
+  "Talk": "Lets Talk",
+  "Support": "General Support",
+  "Name": "TELL US YOUR NAME",
+  "Email": "ENTER YOUR EMAIL",
+  "Fname": "First name",
+  "Lname": "Last name",
+  "Phone": "ENTER PHONE NUMBER",
+  "EmailEg": "Eg. example@email.com",
+  "PhoneEg": "Eg. +1 800 000000",
+  "Message": "Message",
+  "SendMessage": "SEND MESSAGE",
+  "WriteMessage": "Write us a message",
+  "FnameError": "Type first name",
+  "LnameError": "Type last name",
+  "EmailError": "Valid email is required: ex@abc.xyz",
+  "MessageError": "Message is required"
+}
