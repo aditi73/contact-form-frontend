@@ -1,90 +1,50 @@
 <div class="container-contact100">
   <div class="wrap-contact100">
     <form  [formGroup]="contactForm" class="contact100-form validate-form">
+
+      <!-- language selector -->
+      <div class="language">
+        <div>{{'SelectLang' | translate}}</div>
+        <select #langSelect (change)="changeLang(langSelect.value)" class="input100">
+          <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+        </select>
+      </div>
       <span class="contact100-form-title">
-        Send Us A Message
+        {{'Title' | translate}}
       </span>
 
-      <label class="label-input100" for="first-name">Tell us your name *</label>
-      <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Type first name" [ngClass]="displayFieldCss('first_name')">
-        <input id="first-name" class="input100" formControlName="first_name" placeholder="First name">
-        <span class="focus-input100"></span>
-      </div>
-      <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Type last name" [ngClass]="displayFieldCss('last_name')">
-        <input class="input100" formControlName="last_name" placeholder="Last name">
-        <span class="focus-input100"></span>
-      </div>
+      <!-- form fields -->
+      <ng-container *ngFor="let f of formData">
+        <label *ngIf="f.label.length" class="label-input100" for="{{f.id}}">{{f.label | translate}} *</label>
+        <div class="{{f.class}}" [attr.data-validate]="f.ValidateError | translate" [ngClass]="displayFieldCss(f.fieldName)">
+          <input *ngIf="f.fieldName != 'message'" [id]="f.id" class="input100" [formControlName]="f.fieldName" placeholder="{{f.placeholder | translate}}">
+          <textarea *ngIf="f.fieldName == 'message'" [id]="f.id" class="input100" [formControlName]="f.fieldName" rows="5" placeholder="{{f.placeholder | translate}}"></textarea>
+          <span class="focus-input100"></span>
+        </div>
+      </ng-container>
 
-      <label class="label-input100" for="email">Enter your email *</label>
-      <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz" [ngClass]="displayFieldCss('email')">
-        <input id="email" formControlName="email" class="input100" type="email" placeholder="Eg. example@email.com">
-        <span class="focus-input100"></span>
-      </div>
-
-      <label class="label-input100" for="phone">Enter phone number</label>
-      <div class="wrap-input100">
-        <input class="input100" formControlName="phone" placeholder="Eg. +1 800 000000">
-        <span class="focus-input100"></span>
-      </div>
-
-      <label class="label-input100" for="message">Message *</label>
-      <div class="wrap-input100 validate-input" data-validate = "Message is required" [ngClass]="displayFieldCss('email')">
-        <textarea id="message" class="input100" formControlName="message" rows="5" placeholder="Write us a message"></textarea>
-        <span class="focus-input100"></span>
-      </div>
-
+      <!-- submit -->
       <div class="container-contact100-form-btn">
         <button class="contact100-form-btn" (click)="saveContact()">
-          Send Message
+          {{'SendMessage' | translate }}
         </button>
       </div>
     </form>
 
+    <!-- company details -->
     <div class="contact100-more flex-col-c-m" style="background-image: url('assets/images/bg-01.jpg');">
-      <div class="flex-w size1 p-b-47">
+      <div class="flex-w size1 p-b-47" *ngFor="let info of companyData">
         <div class="txt1 p-r-25">
-          <span class="lnr lnr-map-marker"></span>
+          <span [ngClass]="info.class"></span>
         </div>
 
         <div class="flex-col size2">
           <span class="txt1 p-b-20">
-            Address
+            {{info.type | translate}}
           </span>
 
-          <span class="txt2">
-            Mada Center 8th floor, 379 Hudson St, New York, NY 10018 US
-          </span>
-        </div>
-      </div>
-
-      <div class="dis-flex size1 p-b-47">
-        <div class="txt1 p-r-25">
-          <span class="lnr lnr-phone-handset"></span>
-        </div>
-
-        <div class="flex-col size2">
-          <span class="txt1 p-b-20">
-            Lets Talk
-          </span>
-
-          <span class="txt3">
-            +1 800 1236879
-          </span>
-        </div>
-      </div>
-
-      <div class="dis-flex size1 p-b-47">
-        <div class="txt1 p-r-25">
-          <span class="lnr lnr-envelope"></span>
-        </div>
-
-        <div class="flex-col size2">
-          <span class="txt1 p-b-20">
-            General Support
-          </span>
-
-          <span class="txt3">
-            contact@example.com
+          <span [ngClass]="info.valueClass">
+            {{info.value}}
           </span>
         </div>
       </div>
