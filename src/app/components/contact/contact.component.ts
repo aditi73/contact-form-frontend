@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -12,17 +13,21 @@ export class ContactComponent implements OnInit {
   formData: any;
   companyData: any;
   formSubmitAttempt: boolean = false;
-  constructor(private formBuilder: FormBuilder, public translate: TranslateService) {
-    translate.addLangs(['en', 'fr']);
-    translate.setDefaultLang('en');
-    if (localStorage.getItem('locale')) {
-      const browserLang = localStorage.getItem('locale');
-      translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
-    } else {
-      localStorage.setItem('locale', 'en');
-      translate.setDefaultLang('en');
-    }
-  }
+  constructor(
+              private formBuilder: FormBuilder,
+              public translate: TranslateService,
+              private contactService: ContactService
+              ) {
+                  translate.addLangs(['en', 'fr']);
+                  translate.setDefaultLang('en');
+                  if (localStorage.getItem('locale')) {
+                    const browserLang = localStorage.getItem('locale');
+                    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+                  } else {
+                    localStorage.setItem('locale', 'en');
+                    translate.setDefaultLang('en');
+                  }
+                }
 
   ngOnInit(): void {
     this.contactForm  =  this.formBuilder.group({
@@ -52,7 +57,10 @@ export class ContactComponent implements OnInit {
   saveContact(){
     this.formSubmitAttempt = true;
     if(this.contactForm.dirty && this.contactForm.valid){
-      console.log('submit');
+      this.contactService.postData( this.contactForm.value ).subscribe((data:any)=>{
+        this.contactForm.reset();
+        this.formSubmitAttempt = false;
+      });
     }
   }
 
